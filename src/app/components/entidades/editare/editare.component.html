@@ -1,0 +1,24 @@
+<app-navbar></app-navbar>
+<div class="container mb-5 mt-3">
+  <form [formGroup]="entidad">
+    <div class="row">
+      <div class="col form-group">
+        <label for="nombre">Nombre</label>
+        <input type="text" formControlName="nombre" class="form-control" id="nombre" [ngClass]="{'is-invalid': form.nombre.invalid && form.nombre.touched}">
+      </div>
+      <div class="col form-group">
+        <label for="tipo">Tipo</label>
+        <input type="number" formControlName="tipo" class="form-control" id="tipo"
+          [ngClass]="{'is-invalid': form.tipo.invalid && form.tipo.touched}">
+      </div>
+      <div class="col form-group">
+        <label for="ciudad">Ciudad</label>
+        <input type="text" formControlName="ciudad" class="form-control" id="ciudad"
+          [ngClass]="{'is-invalid': form.ciudad.invalid && form.ciudad.touched}">
+      </div>
+    </div>
+    <button type="submit" class="btn btn-primary" [disabled]="entidad.invalid" (click)="save()">Guardar</button>
+    <a class="btn btn-link text-dark" [routerLink]="['/entidades']">Volver</a>
+  </form>
+</div>
+<app-footer></app-footer>

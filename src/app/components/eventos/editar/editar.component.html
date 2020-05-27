@@ -1,0 +1,88 @@
+<app-navbar></app-navbar>
+<div class="container mb-5 mt-3">
+  <form [formGroup]="evento">
+    <div class="row">
+      <div class="col form-group">
+        <label for="nombre">Nombre</label>
+        <input type="text" formControlName="nombre" class="form-control" id="nombre"
+          [ngClass]="{'is-invalid': form.nombre.invalid && form.nombre.touched}" readonly>
+      </div>
+      <div class="col form-group">
+        <label for="fechainicio">Fecha Inicio</label>
+        <input type="date" formControlName="fechaIni" class="form-control" id="fechainicio"
+          [ngClass]="{'is-invalid': form.fechaIni.invalid && form.fechaIni.touched}">
+        <input type="time" formControlName="horaIni" class="form-control" id="fechainicio"
+          [ngClass]="{'is-invalid': form.horaIni.invalid && form.horaIni.touched}">
+      </div>
+      <div class="col form-group">
+        <label for="fechafin">Fecha Fin</label>
+        <input type="date" formControlName="fechaFin" class="form-control" id="fechafin"
+          [ngClass]="{'is-invalid': form.fechaFin.invalid && form.fechaFin.touched}">
+        <input type="time" formControlName="horaFin" class="form-control" id="fechafin"
+          [ngClass]="{'is-invalid': form.horaFin.invalid && form.horaFin.touched}">
+      </div>
+    </div>
+    <div class="row">
+      <div class="col form-group">
+        <label for="enlace">Enlace</label>
+        <input type="url" formControlName="enlace" class="form-control" id="enlace">
+      </div>
+      <div class="col form-group">
+        <label for="grabacion">Grabación</label>
+        <input type="url" formControlName="grabacion" class="form-control" id="grabacion">
+      </div>
+      <div class="col form-group">
+        <label for="entidad">Entidad</label>
+        <select name="entidad" id="entidad" class="form-control" formControlName="entidad"
+          [ngClass]="{'is-invalid': form.entidad.invalid && form.entidad.touched}">
+          <option></option>
+          <option *ngFor="let entidad of entidades" [value]="entidad.id">{{entidad.nombre}}</option>
+        </select>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col form-group">
+        <label for="dependencia">Dependencia</label>
+        <input type="text" formControlName="dependencia" class="form-control" id="dependencia">
+      </div>
+      <div class="col form-group">
+        <label for="responsable">Responsable</label>
+        <input type="text" formControlName="responsable" class="form-control" id="responsable"
+          [ngClass]="{'is-invalid': form.responsable.invalid && form.responsable.touched}">
+      </div>
+      <div class="col form-group">
+        <label for="email">Correo</label>
+        <input type="email" formControlName="email" class="form-control" id="email"
+          [ngClass]="{'is-invalid': form.email.invalid && form.email.touched}">
+      </div>
+    </div>
+    <div class="row">
+      <div class="col form-group">
+        <label for="telefono">Teléfono</label>
+        <input type="number" formControlName="telefono" class="form-control" id="telefono"
+          [ngClass]="{'is-invalid': form.telefono.invalid && form.telefono.touched}">
+      </div>
+      <div class="col form-group">
+        <label for="inscripcion">Inscripción</label>
+        <input type="text" formControlName="inscripcion" class="form-control" id="inscripcion">
+      </div>
+      <div class="col form-group">
+        <label for="area">Área</label>
+        <select name="area" id="area" formControlName="area" class="form-control">
+          <option *ngFor="let area of areas" [value]="area.id">{{area.descripcion}}</option>
+        </select>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col form-group">
+        <label for="descripcion">Descripción</label>
+        <textarea name="descripcion" id="descripcion" formControlName="descripcion" cols="15" rows="2"
+          class="form-control"
+          [ngClass]="{'is-invalid': form.descripcion.invalid && form.descripcion.touched}"></textarea>
+      </div>
+    </div>
+    <button type="submit" class="btn btn-primary" [disabled]="evento.invalid" (click)="save()">Actualizar</button>
+    <a class="btn btn-link text-dark" [routerLink]="['/eventos']">Volver</a>
+  </form>
+</div>
+<app-footer></app-footer>

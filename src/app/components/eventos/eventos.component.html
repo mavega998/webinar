@@ -1,0 +1,30 @@
+<app-navbar></app-navbar>
+<div class="container mb-5 mt-3">
+  <div class="d-flex justify-content-between">
+    <h3>Eventos</h3>
+    <button class="btn btn-info" [routerLink]="['nuevo']">Nuevo</button>
+  </div>
+  <hr>
+  <table class="table table-striped">
+    <tr>
+      <th>Nombre</th>
+      <th>Fecha Inicio</th>
+      <th>Fecha Fin</th>
+      <th>Estado</th>
+      <th>Acciones</th>
+    </tr>
+    <tr *ngFor="let item of eventos">
+      <td>{{item.nombre}}</td>
+      <td>{{item.fechainicio | date:'dd-MM-yyyy hh:mm a'}}</td>
+      <td>{{item.fechafin | date:'dd-MM-yyyy hh:mm a'}}</td>
+      <td *ngIf="item.estado === 0">INACTIVO</td>
+      <td *ngIf="item.estado === 1">ACTIVO</td>
+      <td>
+        <button class="btn btn-warning mx-1" (click)="viewEvent(item)">Ver</button>
+        <button class="btn btn-warning mx-1" (click)="editEvent(item)">Editar</button>
+        <button class="btn btn-danger mx-1" (click)="deleteEvento(item)">Eliminar</button>
+      </td>
+    </tr>
+  </table>
+</div>
+<app-footer></app-footer>

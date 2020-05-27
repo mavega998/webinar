@@ -1,0 +1,27 @@
+<app-navbar></app-navbar>
+<div class="container mb-5 mt-3">
+  <div class="d-flex justify-content-between">
+    <h3>Entidades</h3>
+    <button class="btn btn-info" [routerLink]="['nuevo']">Nuevo</button>
+  </div>
+  <hr>
+  <table class="table table-striped">
+    <tr>
+      <th>Nombre</th>
+      <th>Tipo</th>
+      <th>Ciudad</th>
+      <th>Acciones</th>
+    </tr>
+    <tr *ngFor="let item of entidades">
+      <td>{{item.nombre}}</td>
+      <td>{{item.tipo? item.tipo : 'N/A'}}</td>
+      <td>{{item.ciudad? item.ciudad : 'N/A'}}</td>
+      <td>
+        <button class="btn btn-warning mx-1" (click)="viewEntidad(item)">Ver</button>
+        <button class="btn btn-warning mx-1" (click)="editEntidad(item)">Editar</button>
+        <button class="btn btn-danger mx-1" (click)="deleteEntidad(item)">Eliminar</button>
+      </td>
+    </tr>
+  </table>
+</div>
+<app-footer></app-footer>
