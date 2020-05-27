@@ -35,6 +35,10 @@ export class ApiService {
     return this.http.put(`${environment.url_api}/eventos/${id}`, evento, this.headers());
   }
 
+  findEvento(name) {
+    return this.http.post(`${environment.url_api}/eventos/search`, name, this.headers());
+  }
+
   postEvento(evento) {
     return this.http.post(`${environment.url_api}/eventos`, evento, this.headers());
   }
@@ -83,8 +87,8 @@ export class ApiService {
     const headers = new HttpHeaders();
     headers.append('Allow-Control-Allow-Origin', '*');
     headers.append('Access-Control-Allow-Methods', 'POST, GET, OPTIONS, PUT');
+    headers.append('Content-Type', 'multipart/form-data');
     headers.append('Accept', 'application/json');
-    headers.append('Content-Type', undefined);
     const options = { headers, withCredentials: false };
     return options;
   }

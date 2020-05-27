@@ -13,6 +13,7 @@ export class RedirigirComponent implements OnInit {
 
   constructor(private activate: ActivatedRoute, private apiService: ApiService, private router: Router) {
     this.parametro = this.activate.snapshot.params.id;
+    console.log(this.parametro);
   }
 
   ngOnInit() {

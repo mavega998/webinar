@@ -1,26 +1,30 @@
 <app-navbar></app-navbar>
 <div class="container mb-5 mt-3">
-  <!-- <div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel">
-    <div class="carousel-inner">
-      <div class="carousel-item active">
-          <img src="assets/imgs/webinars.webp" class="d-block w-100" alt="...">
-      </div>
-    </div>
-  </div> -->
   <div class="parallax d-flex justify-content-center">
     <div class="transbox d-flex justify-content-center">
       <h1 class="text-center text-uppercase align-self-center">Eventos</h1>
     </div>
   </div>
-  <div class="card-columns mt-3">
+  <form [formGroup]="search">
+  <div class="input-group input-group mt-3">
+      <input type="text" class="form-control fix-rounded-right" formControlName="nombre">
+      <div class="input-group-prepend">
+        <div class="input-group-text">Escriba el evento a buscar</div>
+      </div>
+    </div>
+  </form>
+  <div class="card-columns mt-3" *ngIf="eventos">
     <div class="card" *ngFor="let item of eventos">
       <div class="card-body">
-        <img src="/assets/imgs/evento.webp" class="card-img-top" alt="Photo by Product School on Unsplash">
+        <img [src]="item.img" class="card-img-top">
         <h5 class="card-title text-uppercase">{{item.nombre}}</h5>
         <p class="card-text">{{item.descripcion}}</p>
         <button class="btn btn-outline-primary btn-block" (click)="showEvent(item)"
           [disabled]="!item.enlace && !item.grabacion">Ver más</button>
       </div>
+    </div>
+    <div *ngIf="eventos.length === 0">
+      <h3>No hay eventos</h3>
     </div>
   </div>
 </div>

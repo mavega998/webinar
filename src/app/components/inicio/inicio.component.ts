@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ApiService } from 'src/app/services/api.service';
 import { DatePipe } from '@angular/common';
 import Swal from 'sweetalert2';
+import { FormGroup, FormBuilder } from '@angular/forms';
 
 @Component({
   selector: 'app-inicio',
@@ -10,8 +11,22 @@ import Swal from 'sweetalert2';
 })
 export class InicioComponent implements OnInit {
   eventos: any[];
+  search: FormGroup;
 
-  constructor(private apiService: ApiService, private datePipe: DatePipe) { }
+  constructor(private apiService: ApiService, private datePipe: DatePipe, private formBuilder: FormBuilder) {
+    this.search = this.formBuilder.group({
+      nombre: ['']
+    });
+
+    this.search.get('nombre').valueChanges.subscribe(data => {
+      if (data.length > 2) {
+        this.buscarEvento();
+      }
+      if (data === '') {
+        this.loadEvents();
+      }
+    });
+  }
 
   ngOnInit(): void {
     this.loadEvents();
@@ -20,6 +35,9 @@ export class InicioComponent implements OnInit {
   loadEvents() {
     this.apiService.getEventos().subscribe((ev: any) => {
       this.eventos = ev.msg;
+      this.eventos.forEach(evento => {
+        evento.img = 'data:image/jpeg;base64,' + evento.img;
+      });
     });
   }
 
@@ -52,4 +70,12 @@ export class InicioComponent implements OnInit {
     });
   }
 
+  buscarEvento() {
+    this.apiService.findEvento(this.search.value).subscribe((data: any) => {
+      this.eventos = data.msg;
+      this.eventos.forEach(evento => {
+        evento.img = 'data:image/jpeg;base64,' + evento.img;
+      });
+    });
+  }
 }

@@ -14,6 +14,7 @@ export class NuevoComponent implements OnInit {
   evento: FormGroup;
   entidades: any[];
   areas: any[];
+  file;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -37,7 +38,8 @@ export class NuevoComponent implements OnInit {
       email: ['', Validators.required],
       telefono: ['', Validators.required],
       inscripcion: [''],
-      area: [0]
+      area: [0],
+      file: null
     });
   }
 
@@ -77,7 +79,8 @@ export class NuevoComponent implements OnInit {
       email: this.evento.get('email').value,
       telefono: this.evento.get('telefono').value,
       inscripcion: this.evento.get('inscripcion').value,
-      area: this.evento.get('area').value ? Number(this.evento.get('area').value) : this.evento.get('area').value
+      area: this.evento.get('area').value ? Number(this.evento.get('area').value) : this.evento.get('area').value,
+      file: this.evento.get('file').value
     };
 
     this.apiService.postEvento(eventAux).subscribe((data: any) => {
@@ -96,5 +99,20 @@ export class NuevoComponent implements OnInit {
         text: err.error.msg.sqlMessage,
       });
     });
+  }
+
+  fileChange(event) {
+    let reader = new FileReader();
+    if (event.target.files && event.target.files.length > 0) {
+      let file = event.target.files[0];
+      reader.readAsDataURL(file);
+      reader.onload = () => {
+        this.evento.get('file').setValue({
+          filename: file.name,
+          filetype: file.type,
+          value: (<string>reader.result).split(',')[1]
+        });
+      };
+    }
   }
 }

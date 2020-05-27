@@ -1,10 +1,11 @@
 <app-navbar></app-navbar>
 <div class="container mb-5 mt-3">
-  <form [formGroup]="evento">
+  <form [formGroup]="evento" enctype="multipart/form-data">
     <div class="row">
       <div class="col form-group">
         <label for="nombre">Nombre</label>
-        <input type="text" formControlName="nombre" class="form-control" id="nombre" [ngClass]="{'is-invalid': form.nombre.invalid && form.nombre.touched}">
+        <input type="text" formControlName="nombre" class="form-control" id="nombre"
+          [ngClass]="{'is-invalid': form.nombre.invalid && form.nombre.touched}">
       </div>
       <div class="col form-group">
         <label for="fechainicio">Fecha Inicio</label>
@@ -79,6 +80,11 @@
         <textarea name="descripcion" id="descripcion" formControlName="descripcion" cols="15" rows="2"
           class="form-control"
           [ngClass]="{'is-invalid': form.descripcion.invalid && form.descripcion.touched}"></textarea>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col form-group">
+        <input type="file" (change)="fileChange($event)" placeholder="Upload file" accept=".jpg, .jpeg, .png">
       </div>
     </div>
     <button type="submit" class="btn btn-primary" [disabled]="evento.invalid" (click)="save()">Guardar</button>

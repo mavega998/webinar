@@ -81,6 +81,11 @@
           [ngClass]="{'is-invalid': form.descripcion.invalid && form.descripcion.touched}"></textarea>
       </div>
     </div>
+    <!-- <div class="row">
+      <div class="col form-group">
+        <input type="file" (change)="fileChange($event)" placeholder="Upload file" accept=".jpg, .jpeg, .png">
+      </div>
+    </div> -->
     <button type="submit" class="btn btn-primary" [disabled]="evento.invalid" (click)="save()">Actualizar</button>
     <a class="btn btn-link text-dark" [routerLink]="['/eventos']">Volver</a>
   </form>
